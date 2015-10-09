@@ -13,7 +13,7 @@
 
 
 
-class sprintsts () {
+class springsts () {
 
   include archive::prerequisites
 
