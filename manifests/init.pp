@@ -21,45 +21,47 @@ class springsts () {
 
   $libName         = $springsts::params::libName
   $targetDir       = $springsts::params::targetDir
+  $tmpDir          = $springsts::params::tmpDir
+  $srcURL          = $springsts::params::srcURL
+  $homeDir         = $springsts::params::homeDir
 
+  notice("tmpDir: ${tmpDir}")
+  notice("srcURL: ${srcURL}")
+  notice("homeDir: ${homeDir}")
+  notice("libName: ${libName}")
+  notice("targetDir: ${targetDir}")
 
-  notice("srcURL: ${springsts::params::srcURL}")
-  notice("homeDir: ${springsts::params::homeDir}")
-  notice("libName: ${springsts::params::libName}")
-  notice("targetDir: ${springsts::params::targetDir}")
-
-  file { $springsts::params::targetDir:
+  file { $targetDir:
     ensure => directory,
   }
 
-  file { $springsts::params::tmpDir:
+  file { $tmpDir:
     ensure  => directory,
   }
 
-  archive { $springsts::params::libName:
+  archive { $libName:
     ensure     => present,
-    url        => $springsts::params::srcURL,
+    url        => $srcURL,
     extension  => 'tar.gz',
-    src_target => $springsts::params::tmpDir,
-    target     => $springsts::params::targetDir,
+    strip_components => 1,
+    src_target => $tmpDir,
+    target     => $targetDir,
     checksum   => $springsts::params::checksum,
-    require    => [File[$springsts::params::tmpDir]
-      , File[$springsts::params::targetDir]
-    ],
+    require    => [File[$tmpDir], File[$targetDir]],
   }
 
-  file { 'springsts.desktop.Schreibtisch':
-    ensure  => file,
-    path    => "${springsts::params::homeDir}/Schreibtisch/spring-sts.desktop",
-    content => template('springsts/spring-sts.desktop.erb'),
-    require => Archive[$springsts::params::libName],
-  }
-  
-  file { 'springsts.desktop.local':
-    ensure  => file,
-    path    => "${springsts::params::homeDir}
-    /.local/share/applications/spring-sts.desktop",
-    content => template('springsts/spring-sts.desktop.erb'),
-    require => Archive[$springsts::params::libName],
-  }
+#  file { 'springsts.desktop.Schreibtisch':
+#    ensure  => file,
+#    path    => "${homeDir}/Schreibtisch/spring-sts.desktop",
+#    content => template('springsts/spring-sts.desktop.erb'),
+#    require => Archive[$libName],
+#  }
+#  
+#  file { 'springsts.desktop.local':
+#    ensure  => file,
+#    path    => "${homeDir}
+#    /.local/share/applications/spring-sts.desktop",
+#    content => template('springsts/spring-sts.desktop.erb'),
+#    require => Archive[$libName],
+#  }
 }
