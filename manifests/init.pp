@@ -39,7 +39,7 @@ class springsts () {
   archive { $springsts::params::libName:
     ensure     => present,
     url        => $springsts::params::srcURL,
-    extension  => 'tgz',
+    extension  => 'tar.gz',
     src_target => $springsts::params::tmpDir,
     target     => $springsts::params::targetDir,
     checksum   => $springsts::params::checksum,
