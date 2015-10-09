@@ -1,0 +1,18 @@
+{
+  "author": "FunThomas424242 (Thomas Schubert)",
+  "dependencies": [{
+      "name": "gini/archive",
+      "version_requirement": ">= 0.2.1"
+    }],
+  "license": "GNU LGPL v3",
+  "name": "funthomas424242-springsts",
+  "operatingsystem_support": [{"operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04"]}],
+  "project_page": "https://github.com/FunThomas424242/spring-sts.puppet",
+  "requirements": [],
+  "source": "https://github.com/FunThomas424242/spring-sts.puppet.git",
+  "summary": "Install the ide geppetto to local drive.",
+  "tags": ["ubuntu", "spring-sts", "ide", "puppet", "sts" ],
+  "version": "0.1.0"
+}
